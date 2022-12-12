@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()">×</button>
+  <h3 id="publishPollLabel">{{ question.question }}</h3>
+</div>
+<div class="modal-body">
+  <section class="alert alert-danger" ng-if="alerts"></section>
+
+  <section class="panel panel-info">
+    <div class="panel-heading">Post Location</div>
+    <div class="panel-body">
+      <p>
+        <label for="pollPage">Where should the poll be posted?</label>
+        <select id="pollPage" ng-model="post.fbPageId" ng-options="p.fbPage.id as p.fbPage.name for p in pages">
+          <option value="">--- Pick a Page ---</option>
+        </select>
+      </p>
+    </div>
+  </section>
+
+  <section class="panel panel-info">
+    <div class="panel-heading">Post Details</div>
+    <div class="panel-body">
+      <small>
+        <span class="badge badge-info">Note</span> All parts are optional. The question text is provided by Votifi, but
+        can be edited.
+      </small>
+      <br/>
+      <blockquote class="split">
+        <p>
+          <label for="postQuestion">Status question</label>
+          <textarea id="postQuestion" ng-model="post.message"></textarea>
+        </p>
+
+        <p>
+          <label for="postDescription">Survey question / description</label>
+          <textarea id="postDescription" ng-model="post.description"></textarea>
+        </p>
+
+        <p>
+          <label for="postTitle">Survey title</label>
+          <input type="text" id="postTitle" placeholder="{{ question.question }}" ng-model="post.name" value="{{ question.question }}">
+        </p>
+
+        <p>
+          <label for="postImage">Image</label>
+          <input type="url" id="postImage" placeholder="http://example.com/image.jpg" ng-model="post.picture">
+        </p>
+
+        <p>
+          <img ng-src="/images/fb-example.jpg" width="480" alt=""/>
+        </p>
+      </blockquote>
+    </div>
+  </section>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-info" ng-click="publish()">Publish</button>
+</div>
+

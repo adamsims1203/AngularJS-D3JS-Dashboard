@@ -1,0 +1,124 @@
+<div class="col-md-12 segment--transparent">
+    <h2 class="segment__title">Projects Overview <br>
+        <small class="segment__title--small">Your projects, at a glance.</small>
+    </h2>
+    <tabset>
+        <tab ng-repeat="data in questionData" heading="{{ data.name }}">
+            <div class="row">
+                <section class="col-md-4 table-responsive">
+                    <table class="table table-data">
+                        <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Cumulative</th>
+                            <th>Last Month</th>
+                            <th>Last Week</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Number of Users</td>
+                            <td>{{ data.cumulative.sumUsers }}</td>
+                            <td>{{ data.lastMonth.sumUsers }}</td>
+                            <td>{{ data.lastWeek.sumUsers }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Interactions</td>
+                            <td>{{ data.cumulative.sumInteractions }}</td>
+                            <td>{{ data.lastMonth.sumInteractions }}</td>
+                            <td>{{ data.lastWeek.sumInteractions }}</td>
+                        </tr>
+                        <tr>
+                            <td>Engagement Index</td>
+                            <td>{{ data.cumulative.sumInteractions / data.cumulative.sumUsers | number:2 }}</td>
+                            <td>{{ data.lastMonth.sumInteractions / data.lastMonth.sumUsers | number:2 }}</td>
+                            <td>{{ data.lastWeek.sumInteractions / data.lastWeek.sumUsers | number:2 }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="col-md-8">
+                    <div class="btn-group">
+                        <button class="btn btn-flat" ng-click="changeTimeFrame('weekly')">Last Week</button>
+                        <button class="btn btn-flat" ng-click="changeTimeFrame('monthly')">Last Month</button>
+                    </div>
+                    <nvd3-multi-bar-chart
+                            data="chartData[$index]"
+                            id="{{ data.id }}"
+                            interactive="true"
+                            tooltips="true"
+                            tooltipcontent="questionToolTipContent()"
+                            showXAxis="true"
+                            showYAxis="true"
+                            showValues="true"
+                            showControls="false"
+                            width="710"
+                            height="500"
+                            xAxisTickFormat="formatDateAsDayName()"
+                            color="colorPalette(data.lastWeek.datas)"
+                            margin="{top:40,right:10,left:50,bottom:70}"
+                            yAxisTickFormat="questionYAxisFormat()">
+                        <svg></svg>
+                    </nvd3-multi-bar-chart>
+                </section>
+            </div>
+        </tab>
+    </tabset>
+</div>
+<div class="col-md-12">
+    <div class="row">
+        <section class="col-md-6">
+            <div class="segment">
+                <h2 class="segment__title">Clusters Summary <br>
+                    <small class="segment__title--small">Overview of user clusters.</small>
+                </h2>
+                <div class="row">
+                    <div class="col-md-9 chart__graph--cluster-summary">
+                        <nvd3-pie-chart
+                                data="clusters"
+                                id="clusterOverviewPieChart"
+                                width="370"
+                                height="370"
+                                x="xFunction()"
+                                y="yFunction()"
+                                tooltips="true"
+                                color="colorPalette(clusters)"
+                                tooltipcontent="clusterToolTipContent()"
+                                margin="{top:0,left:0,right:0,bottom:0}">
+                            <svg></svg>
+                        </nvd3-pie-chart>
+                    </div>
+                    <div class="col-md-3 chart__description--cluster-summary">
+                        <div ng-repeat="cluster in clusters" class="statistic">
+                            <h3 class="statistic__title">{{ cluster.key }}<br> <small class="statistic__title--small">{{ cluster.y / clusterData.total * 100 | number:1 }}%</small></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="col-md-6">
+            <div class="segment">
+                <h2 class="segment__title">Category Summary <br>
+                    <small class="segment__title--small">Category popularity.</small>
+                </h2>
+                <nvd3-discrete-bar-chart
+                        data="trendingNodes.trending.datas"
+                        id="nodeOverviewBarChart"
+                        interactive="true"
+                        showXAxis="true"
+                        showYAxis="false"
+                        tooltips="true"
+                        tooltipcontent="nodeToolTipContent()"
+                        xAxisTickFormat="nodeXAxisContent()"
+                        width="475"
+                        height="300"
+                        showValues="true"
+                        valueFormat="nodeValueFormat()"
+                        color="colorPalette(trendingNodes.trending.datas[0].values)"
+                        margin="{top:10,left:0,right:0,bottom:50}">
+                    <svg></svg>
+                </nvd3-discrete-bar-chart>
+            </div>
+        </section>
+    </div>
+</div>

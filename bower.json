@@ -1,0 +1,31 @@
+{
+  "name": "votifi-angular",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.2.15",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "angular-resource": "1.2.15",
+    "angular-cookies": "1.2.15",
+    "angular-sanitize": "1.2.15",
+    "angular-route": "1.2.15",
+    "angular-animate": "1.2.15",
+    "angularjs-nvd3-directives": "~0.0.7",
+    "angular-bootstrap": "~0.10.0",
+    "bootstrap-sass-official": ">= 3.1.1",
+    "pushy": "~0.9.1",
+    "modernizr": "~2.7.2",
+    "jquery": "~2.1.0",
+    "angular-cache": "~2.3.3",
+    "angular-easyfb": "~1.0.1",
+    "bootstrap-switch": "~3.0.0",
+    "webshim": "~1.12.7"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.15",
+    "angular-scenario": "1.2.15"
+  },
+  "resolutions": {
+    "d3": "~3.4.1"
+  }
+}

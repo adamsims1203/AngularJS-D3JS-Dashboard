@@ -1,0 +1,29 @@
+<div class="col-md-12">
+    <div class="row page-branding">
+        <div class="col-md-12">
+            <img ng-src="{{ account.logo }}" class="logo pull-left" alt="{{ account.name }}" ng-class="{visuallyhidden: !account.logo.length}">
+            <h1 class="pull-left">{{ account.name }}
+                <br>
+                <small>{{ subtitle }}</small></h1>
+        </div>
+    </div>
+
+    <div class="row page-navigation">
+        <div class="col-md-12">
+            <nav role="navigation">
+                <a ng-class="{ active: activePage('/')}" href="/">Overview</a>
+                <a ng-class="{ active: activePage('/questions')}" href="/#/questions" ng-if="account.has_facebook">Questions</a>
+                <a ng-class="{ active: activePage('/nodes')}" href="/#/nodes">Nodes</a>
+                <a ng-class="{ active: activePage('/clusters')}" href="/#/clusters">Clusters</a>
+                <a ng-class="{ active: activePage('/export')}" href="/#/export">Export</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <alert ng-repeat="message in messages" type="message.type" close="exitMessage($index)">{{ message.content }}</alert>
+        </div>
+    </div>
+
+</div>
